@@ -106,7 +106,7 @@ export default function EditNotePage() {
   const handleUpdateNote = async (data: {
     title: string;
     content: string;
-    categoryId?: string;
+    categoryId?: string | null;
     tagIds?: string[];
     isPinned?: boolean;
     isArchived?: boolean;

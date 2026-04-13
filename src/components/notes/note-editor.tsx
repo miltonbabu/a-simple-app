@@ -23,6 +23,10 @@ interface NoteEditorProps {
     content: string;
     categoryId?: string | null;
     tags: Tag[];
+    tagIds?: string[];
+    isPinned?: boolean;
+    isArchived?: boolean;
+    isFavorite?: boolean;
   };
   categories?: Category[];
   availableTags?: Tag[];
