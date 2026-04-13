@@ -84,16 +84,19 @@ export default function NotesPage() {
   /** Toggle note pin status */
   const handleTogglePin = async (id: string) => {
     try {
+      const currentNote = notes.find((n) => n.id === id);
+      if (!currentNote) return;
+
       const response = await fetch(`/api/notes/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ isPinned: true }), // Will be handled by API to toggle
+        body: JSON.stringify({ isPinned: !currentNote.isPinned }),
       });
 
       if (!response.ok) throw new Error("Failed to toggle pin");
-      
+
       refetch();
-      toast.success("Note pin toggled");
+      toast.success(currentNote.isPinned ? "Note unpinned" : "Note pinned");
     } catch (error) {
       toast.error("Failed to toggle pin");
     }
