@@ -18,11 +18,11 @@ import { Tag } from "@prisma/client";
 
 interface NoteEditorProps {
   initialData?: {
-    id: string;
-    title: string;
-    content: string;
+    id?: string;
+    title?: string;
+    content?: string;
     categoryId?: string | null;
-    tags: Tag[];
+    tags?: Tag[];
     tagIds?: string[];
     isPinned?: boolean;
     isArchived?: boolean;
