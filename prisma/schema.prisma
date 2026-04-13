@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  notes         Note[]
+  categories    Category[]
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String
+  color     String   @default("#3B82F6")
+  icon      String   @default("Folder")
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  notes     Note[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  color     String   @default("#8B5CF6")
+  notes     NoteTag[]
+  createdAt DateTime @default(now())
+}
+
+model Note {
+  id          String    @id @default(cuid())
+  title       String
+  content     String    @default("") @db.Text
+  isPinned    Boolean   @default(false)
+  isArchived  Boolean   @default(false)
+  isFavorite  Boolean   @default(false)
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tags        NoteTag[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model NoteTag {
+  id     String @id @default(cuid())
+  noteId String
+  tagId  String
+  note   Note   @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  tag    Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([noteId, tagId])
+}
