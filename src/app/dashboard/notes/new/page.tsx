@@ -46,7 +46,7 @@ export default function NewNotePage() {
   const handleCreateNote = async (data: {
     title: string;
     content: string;
-    categoryId?: string;
+    categoryId?: string | null;
     tagIds?: string[];
     isPinned?: boolean;
     isArchived?: boolean;
