@@ -31,7 +31,7 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 interface SheetContextType {
-  side?: "top" | "bottom" | "left" | "right"
+  side?: "top" | "bottom" | "left" | "right" | null
 }
 
 const SheetContext = React.createContext<SheetContextType>({})
