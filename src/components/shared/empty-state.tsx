@@ -49,7 +49,7 @@ export function EmptyState({
 
 /** Pre-configured empty states for common scenarios */
 export const EmptyStates = {
-  notes: (onCreate?: () => () => void) => (
+  notes: (onCreate?: () => void) => (
     <EmptyState
       icon={FileText}
       title="No notes yet"
@@ -65,7 +65,7 @@ export const EmptyStates = {
       description="Try adjusting your search or filter criteria."
     />
   ),
-  categories: (onCreate?: () => () => void) => (
+  categories: (onCreate?: () => void) => (
     <EmptyState
       icon={FolderOpen}
       title="No categories"
