@@ -9,11 +9,9 @@ import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { CategoryWithCount } from "@/types";
 
 interface CategoryListProps {
-  /** Array of categories to display */
   categories: CategoryWithCount[];
-  /** Callback when edit is requested */
+  loading?: boolean;
   onEdit?: (category: CategoryWithCount) => void;
-  /** Callback when delete is requested */
   onDelete?: (id: string) => Promise<void>;
 }
 
@@ -21,7 +19,11 @@ interface CategoryListProps {
  * List component displaying all categories with edit/delete actions
  * Shows category name, color, icon, and note count
  */
-export function CategoryList({ categories, onEdit, onDelete }: CategoryListProps) {
+export function CategoryList({
+  categories,
+  onEdit,
+  onDelete,
+}: CategoryListProps) {
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
   const handleDeleteConfirm = async () => {
@@ -67,7 +69,8 @@ export function CategoryList({ categories, onEdit, onDelete }: CategoryListProps
                   <div className="min-w-0 flex-1">
                     <h4 className="font-medium truncate">{category.name}</h4>
                     <Badge variant="secondary" className="mt-1 text-xs">
-                      {category._count.notes} {category._count.notes === 1 ? "note" : "notes"}
+                      {category._count.notes}{" "}
+                      {category._count.notes === 1 ? "note" : "notes"}
                     </Badge>
                   </div>
                 </div>
